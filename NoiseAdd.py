@@ -12,7 +12,7 @@ def NoiseAdd(ECG,Noise,t):
     ECGN=np.zeros((15,len(t)))
     pi=3.1416
     for i in range (0,len(t)):
-            ECGN[0,i]=ECG[0,i]+Noise[0]*2*math.sin(2*pi*Noise[1]*t[i])
+            ECGN[0,i]=ECG[0,i]+Noise[0]*0.07*math.sin(2*pi*Noise[1]*t[i])
             ECGN[1,i]=ECG[1,i]+Noise[0]*0.03*math.sin(2*pi*Noise[1]*t[i])
             ECGN[8,i]=ECG[8,i]+Noise[0]*0.02*math.sin(2*pi*Noise[1]*t[i])
             ECGN[9,i]=ECG[9,i]+Noise[0]*0.025*math.sin(2*pi*Noise[1]*t[i])
