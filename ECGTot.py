@@ -45,8 +45,8 @@ def ECGDualGuide(ATotal,BPM,N,t):
     ############ LEAD 1 ######################################
     
     Ap=(1/10)*ATotal   #Ap=0.1
-    At=(2/10)*ATotal  #At=0.15
-    Aqrs=(5/10)*ATotal   #Aqrs=0.6
+    At=(1.5/10)*ATotal  #At=0.15
+    Aqrs=(6/10)*ATotal   #Aqrs=0.6
     
     D1=ECG.ECG_NS(t,DesfaseP,DesfaseT,A,B,C,D,pi,TPW,TTW,TQRS,TPQ,TST,T,Aqrs,Ap,At,N)
     Corte=((TQRS/2)+TST*0.5)/0.01
@@ -58,9 +58,9 @@ def ECGDualGuide(ATotal,BPM,N,t):
     
     ########### LEAD 2 ########################################
     
-    Ap=(2/10)*ATotal
+    Ap=(1.5/10)*ATotal
     At=(2.5/10)*ATotal
-    Aqrs=ATotal
+    Aqrs=0.9 * ATotal
     D2=ECG.ECG_NS(t,DesfaseP,DesfaseT,A,B,C,D,pi,TPW,TTW,TQRS,TPQ,TST,T,Aqrs,Ap,At,N)
     D2[:]=D2[:]-D2[Corte]
     for i in range (0,len(t)):
