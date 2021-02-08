@@ -48,6 +48,19 @@ class Ecg():
 		return NoiseAdd(signal, fre, t)
 
 	@staticmethod
+	def fourier(signal, t):
+		""" Método para representar espectro de fourier """
+		ECGFourier = np.fft.fft(signal[0,:])
+		Freq = np.fft.fftfreq(t.shape[-1]) * 100
+		EjX=max(Freq)
+		EjY=max(ECGFourier)
+		fig = plt.figure(figsize=(10, 10))
+		plt.xlim(0, EjX)
+		plt.ylim(0, EjY)
+		plt.stem(Freq, ECGFourier.real)
+		plt.show()
+
+	@staticmethod
 	def show_ecg(signal, t):
 		""" Método para mostrar derivadas """
 		name = ['I','II','III', 'avR', 'avF', 'avL', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6']
@@ -67,15 +80,18 @@ class Ecg():
 
 ########################################## ECG NORMAL #############################################################
 
-mio = Ecg(90, 60, 5)
+mio = Ecg(70, 60, 5) ### armónicos se deja fijo
 array, t = mio.derivadas()
 Ecg.show_ecg(array, t)
 
 ######################################### ECG ANOMALÍA ############################################################
 
-array, t = mio.anomalias('Fibrilación auricular')
-Ecg.show_ecg(array, t)
+array2, t2 = mio.anomalias('Fibrilación auricular')
+Ecg.show_ecg(array2, t2)
 
 ######################################### ECG CON RUIDO ###########################################################
 withnoise = Ecg.add_noise(array, [1, 60], t)
 Ecg.show_ecg(withnoise, t)
+
+######################################## Espectro de Fourier ######################################
+Ecg.fourier(array, t)
